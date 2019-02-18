@@ -1,0 +1,11 @@
+<div class="input-group">
+  <input class="input" type="text" [placeholder]="placeholder"
+         [(ngModel)]="value" [attr.aria-label]="ariaLabel" [attr.id]="id || _id">
+  <span class="validate-label" *ngIf="true">
+        <span [ngClass]="true ? 'icon-check' : 'icon-error'"></span>
+      </span>
+  <label [for]="id || _id">
+    ERROR MESSAGE!
+  </label>
+</div>
+

@@ -133,6 +133,42 @@
           }
         }
       }
+    },
+    "ff-validation": {
+      "root": "projects/ff-validation",
+      "sourceRoot": "projects/ff-validation/src",
+      "projectType": "library",
+      "prefix": "ff",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ff-validation/tsconfig.lib.json",
+            "project": "projects/ff-validation/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ff-validation/src/test.ts",
+            "tsConfig": "projects/ff-validation/tsconfig.spec.json",
+            "karmaConfig": "projects/ff-validation/karma.conf.js",
+            "codeCoverage": true
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ff-validation/tsconfig.lib.json",
+              "projects/ff-validation/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ff-validation-app"
