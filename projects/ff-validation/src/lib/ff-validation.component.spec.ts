@@ -1,16 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FFValidationComponent } from './ff-validation.component';
+import { FormsModule } from '@angular/forms';
 
 describe('FFValidationComponent', () => {
-  let component: FFValidationComponent;
-  let fixture: ComponentFixture<FFValidationComponent>;
+  let component : FFValidationComponent;
+  let fixture : ComponentFixture<FFValidationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FFValidationComponent ]
+      declarations: [FFValidationComponent],
+      imports     : [FormsModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

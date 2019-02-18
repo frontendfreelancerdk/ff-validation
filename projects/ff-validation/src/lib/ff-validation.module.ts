@@ -6,8 +6,8 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [FFValidationComponent],
   imports     : [
-    CommonModule,
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   exports     : [FFValidationComponent]
 })
