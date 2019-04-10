@@ -1,40 +1,45 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, ContentChild, Input, OnInit} from '@angular/core';
+import {FFValidationDirective} from './ff-validation.directive';
 
 
 @Component({
-  selector   : 'ff-validation',
+  selector: 'ff-validation',
   templateUrl: './ff-validation.component.html',
-  styleUrls  : ['./ff-validation.component.scss']
+  styleUrls: ['./ff-validation.component.scss']
 })
 export class FFValidationComponent implements OnInit {
-  @Input() placeholder : string = '';
-  @Input() ariaLabel : string = '';
-  @Input() id : string = '';
-  @Input() validators : string[] = [];
-
-  _value : string = '';
-  _id : string;
-
-  get value() : string {
-    return this._value;
+  @ContentChild(FFValidationDirective)
+  input: FFValidationDirective;
+  _errors: string[] = [];
+  get errors() {
+    return this._errors;
   }
 
-  set value(val : string) {
-    this._value = val;
+  _messages = {};
+  get messages() {
+    return this._messages;
+  }
+
+  @Input() set errors(val) {
+    this._errors = val;
+  }
+
+  @Input() set messages(val) {
+    this._messages = val;
   }
 
   constructor() {
-    this._id = this.idGenerator();
   }
 
   ngOnInit() {
   }
 
-  private idGenerator() {
-    const s4 = function () {
-      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-    };
-    return ('id' + s4() + s4());
+  focusInput() {
+    this.input && this.input.el.nativeElement.focus();
+  }
+
+  isTouched() {
+    return this.input && this.input.status === 'touched';
   }
 
 }

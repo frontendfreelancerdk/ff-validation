@@ -1,6 +1,6 @@
 {
   "name": "ff-validation-app",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -10,7 +10,8 @@
     "e2e": "ng e2e",
     "test_lib": "ng test ff-validation --watch=false --browsers=ChromeHeadless",
     "build_lib": "ng build ff-validation",
-    "prebuild_lib": "node copy_readme"
+    "prebuild_lib": "node copy_readme",
+    "watch_lib": "ng build ff-validation --watch"
   },
   "private": true,
   "dependencies": {

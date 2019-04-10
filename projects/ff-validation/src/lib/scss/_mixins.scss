@@ -1,0 +1,107 @@
+@mixin placeholder {
+  &.placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
+}
+
+@mixin mq($width, $type: max) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map_get($breakpoints, $width);
+    @if $type == min {
+      $width: $width + 1px;
+    }
+    @media only screen and (#{$type}-width: $width - 1px) {
+      @content;
+    }
+  }
+}
+
+@mixin link($color:$color_text) {
+  display: inline-block;
+  color: $color;
+  text-decoration: none;
+  font-weight: 600;
+  @content;
+}
+
+@mixin pseudo($display: block, $pos: absolute, $content: '') {
+  content: $content;
+  display: $display;
+  position: $pos;
+}
+
+@mixin css-triangle($color, $direction, $size: 6px, $position: absolute, $round: false) {
+  @include pseudo($pos: $position);
+  width: 0;
+  height: 0;
+  @if $round {
+    border-radius: 3px;
+  }
+  @if $direction == down {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-top: $size solid $color;
+    margin-top: 0 - round( $size / 2.5 );
+  } @else if $direction == up {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: $size solid $color;
+    margin-bottom: 0 - round( $size / 2.5 );
+  } @else if $direction == right {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-left: $size solid $color;
+    margin-right: -$size;
+  } @else if $direction == left {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-right: $size solid $color;
+    margin-left: -$size;
+  }
+}
+
+@mixin font-size($sizeValue: 1.6) {
+  font-size: ($sizeValue * 10) + px;
+  font-size: $sizeValue + rem;
+}
+
+.host-page {
+  display: block;
+  overflow: hidden;
+  transform: translate(0);
+  opacity: 1;
+  position: relative;
+  width: 100%;
+  background-color: $color_base;
+}
+
+@mixin bodytext-link {
+  //color: $color-link;
+  color: inherit;
+  transition: color 0.3s;
+  font-weight: 600;
+  text-decoration: underline;
+  &:visited {
+    //color: $color-link-visited;
+    color: inherit;
+  }
+  &:hover {
+    // TODO we should change this color because of => https://dequeuniversity.com/rules/axe/2.2/color-contrast?application=lighthouse !!!
+    //color: desaturate($color-link-hover,40);
+    color: darken($color_inputs, 17%)
+  }
+
+}
+

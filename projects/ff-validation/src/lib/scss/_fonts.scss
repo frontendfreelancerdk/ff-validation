@@ -1,0 +1,39 @@
+/* titillium-web-200normal - latin */
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200;
+  src:
+    local('Titillium Web Extra Light '),
+    local('Titillium Web-Extra Light'),
+    url('../node_modules/typeface-titillium-web/files/titillium-web-latin-200.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../node_modules/typeface-titillium-web/files/titillium-web-latin-200.woff') format('woff'); /* Modern Browsers */
+}
+
+
+/* titillium-web-400normal - latin */
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src:
+    local('Titillium Web Regular '),
+    local('Titillium Web-Regular'),
+    url('../node_modules/typeface-titillium-web/files/titillium-web-latin-400.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../node_modules/typeface-titillium-web/files/titillium-web-latin-400.woff') format('woff'); /* Modern Browsers */
+}
+
+/* titillium-web-600normal - latin */
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src:
+    local('Titillium Web SemiBold '),
+    local('Titillium Web-SemiBold'),
+    url('../node_modules/typeface-titillium-web/files/titillium-web-latin-600.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../node_modules/typeface-titillium-web/files/titillium-web-latin-600.woff') format('woff'); /* Modern Browsers */
+}

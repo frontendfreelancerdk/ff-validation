@@ -5,6 +5,7 @@
       true,
       "attribute",
       "ff",
+      "FF",
       "camelCase"
     ],
     "component-selector": [

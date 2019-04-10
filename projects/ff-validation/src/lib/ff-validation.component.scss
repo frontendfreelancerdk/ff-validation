@@ -1,0 +1,72 @@
+@import "scss/index";
+:host ::ng-deep i {
+  min-width: 1em;
+  height: 1em;
+  margin-right: 0.3em;
+}
+:host ::ng-deep input {
+  border: none;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: inherit;
+}
+svg {
+  min-width: 0.8em;
+  height: 0.8em;
+  margin-left: 0.3em;
+  .ff-invalid & {
+    fill: $color_alert;
+  }
+  .ff-valid & {
+    fill: $color_inputs;
+  }
+}
+.ff-validation-input {
+  position: relative;
+  box-sizing: border-box;
+  border: 0.0625em solid #DDDDDD;
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 0.15em 0.3em;
+  &.ff-invalid{
+    border: 0.0625em solid $color_alert;
+  }
+  &.ff-valid{
+    border: 0.0625em solid $color_inputs;
+  }
+}
+
+.ff-validation-icon,.ff-validation-status {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: flex;
+}
+
+.ff-validation-icon {
+  left: 0;
+}
+
+.ff-validation-status {
+  right: 0;
+}
+
+.ff-validation-errors {
+  background-color: $color_alert;
+  color: #ffffff;
+  margin-top: 0.5em;
+
+  &:before {
+    @include css-triangle($color_alert, 'up', 0.5em);
+    transform: translate(100%, -100%);
+  }
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
