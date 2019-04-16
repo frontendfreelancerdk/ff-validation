@@ -1,21 +1,32 @@
-<div class="ff-validation-input" [ngClass]="{'ff-invalid' : isTouched() && errors.length, 'ff-valid' : isTouched() && !errors.length}" (click)="focusInput()">
+<div class="ff-validation-input"
+     [ngClass]="{'ff-invalid' : !disabled && isTouched() && isDirty() && errors.length, 'ff-valid' : !disabled && isTouched() && isDirty() && !errors.length}"
+     (click)="focusInput()">
   <ng-content select="i"></ng-content>
   <ng-content></ng-content>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" *ngIf="isTouched() && !errors.length">
-    <path
-      d="M470.6 775.8c-5.1 0-15.5-5.2-20.7-10.4l-201.7-243c-5.1-10.4-5.1-26 5.2-36.3s25.9-10.3 36.2 5.2l181 217.2 258.6-450c5.2-10.3 20.7-15.4 36.2-10.3 10.4 10.4 15.5 25.9 10.4 41.4L496.5 765.4a39.5 39.5 0 0 1-25.9 10.4zM512 1024C227.6 1024 0 796.4 0 512S227.6 0 512 0s512 232.7 512 512-227.6 512-512 512zm0-941.3C274.1 82.7 82.7 274.1 82.7 512S274.1 941.3 512 941.3 941.3 749.9 941.3 512 749.9 82.7 512 82.7z"/>
-  </svg>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" *ngIf="isTouched() && errors.length">
-    <path
-      d="M512 1024C227.6 1024 0 796.4 0 512S227.6 0 512 0s512 232.7 512 512-227.6 512-512 512zm0-941.3C274.1 82.7 82.7 274.1 82.7 512S274.1 941.3 512 941.3 941.3 749.9 941.3 512 749.9 82.7 512 82.7zM429.3 724c0-25.8 5.1-41.3 20.6-56.8s36.2-20.7 62.1-20.7 46.5 10.3 62 20.7c15.6 15.5 20.7 36.2 20.7 56.8 0 25.9-5.1 41.4-20.6 57s-36.2 20.6-62.1 20.6-46.5 0-62-15.5c-15.6-15.5-20.7-36.2-20.7-62zm160.3-439.6v57c0 26 0 51.7-5.2 82.7 0 31-5.2 56.9-5.2 87.9S569 568.9 569 589.6c0 0-5.2 5.1-10.4 5.1S548.2 600 543 600c-5.1 0-10.3 0-15.5 5.2H512c-15.5 0-31-5.2-41.4-10.4s-20.7-15.5-20.7-31c-5.1-15.5-5.1-36.2-5.1-62s-5.2-57-5.2-88-5.2-62-5.2-93v-82.8c10.4-5.2 25.9-10.3 41.4-15.5s31-5.2 46.5-5.2c25.9 0 41.4 5.2 57 15.5s10.3 25.9 10.3 51.7z"/>
-  </svg>
+  <ng-container *ngIf="!disabled && isTouched() && isDirty()">
+    <ng-container *ngIf="!errors.length; else invalid">
+      <ng-container *ngIf="!iconValid; else iconValid">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+          <path
+            d="M470.6 775.8c-5.1 0-15.5-5.2-20.7-10.4l-201.7-243c-5.1-10.4-5.1-26 5.2-36.3s25.9-10.3 36.2 5.2l181 217.2 258.6-450c5.2-10.3 20.7-15.4 36.2-10.3 10.4 10.4 15.5 25.9 10.4 41.4L496.5 765.4a39.5 39.5 0 0 1-25.9 10.4zM512 1024C227.6 1024 0 796.4 0 512S227.6 0 512 0s512 232.7 512 512-227.6 512-512 512zm0-941.3C274.1 82.7 82.7 274.1 82.7 512S274.1 941.3 512 941.3 941.3 749.9 941.3 512 749.9 82.7 512 82.7z"/>
+        </svg>
+      </ng-container>
+    </ng-container>
+  </ng-container>
 </div>
-<div (click)="focusInput()" class="ff-validation-errors" *ngIf="errors.length && isTouched()">
-  <ul *ngFor="let error of errors">
-    <li class="error">
+<div (click)="focusInput()" class="ff-validation-errors" *ngIf="!disabled && errors.length && isTouched() && isDirty()">
+  <ul>
+    <li class="error" *ngFor="let error of errors">
       {{messages[error]}}
     </li>
   </ul>
 </div>
-
+<ng-template #invalid>
+  <ng-container *ngIf="!iconInvalid; else iconInvalid">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+      <path
+        d="M512 1024C227.6 1024 0 796.4 0 512S227.6 0 512 0s512 232.7 512 512-227.6 512-512 512zm0-941.3C274.1 82.7 82.7 274.1 82.7 512S274.1 941.3 512 941.3 941.3 749.9 941.3 512 749.9 82.7 512 82.7zM429.3 724c0-25.8 5.1-41.3 20.6-56.8s36.2-20.7 62.1-20.7 46.5 10.3 62 20.7c15.6 15.5 20.7 36.2 20.7 56.8 0 25.9-5.1 41.4-20.6 57s-36.2 20.6-62.1 20.6-46.5 0-62-15.5c-15.6-15.5-20.7-36.2-20.7-62zm160.3-439.6v57c0 26 0 51.7-5.2 82.7 0 31-5.2 56.9-5.2 87.9S569 568.9 569 589.6c0 0-5.2 5.1-10.4 5.1S548.2 600 543 600c-5.1 0-10.3 0-15.5 5.2H512c-15.5 0-31-5.2-41.4-10.4s-20.7-15.5-20.7-31c-5.1-15.5-5.1-36.2-5.1-62s-5.2-57-5.2-88-5.2-62-5.2-93v-82.8c10.4-5.2 25.9-10.3 41.4-15.5s31-5.2 46.5-5.2c25.9 0 41.4 5.2 57 15.5s10.3 25.9 10.3 51.7z"/>
+    </svg>
+  </ng-container>
+</ng-template>
 

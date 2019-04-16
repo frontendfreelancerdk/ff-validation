@@ -1,4 +1,4 @@
-import {Component, ContentChild, Input, OnInit} from '@angular/core';
+import {Component, ContentChild, Input, TemplateRef} from '@angular/core';
 import {FFValidationDirective} from './ff-validation.directive';
 
 
@@ -7,39 +7,49 @@ import {FFValidationDirective} from './ff-validation.directive';
   templateUrl: './ff-validation.component.html',
   styleUrls: ['./ff-validation.component.scss']
 })
-export class FFValidationComponent implements OnInit {
+export class FFValidationComponent {
   @ContentChild(FFValidationDirective)
   input: FFValidationDirective;
-  _errors: string[] = [];
+  private _errors: string[] = [];
+  private _messages = {};
+  private _disabled = false;
+
   get errors() {
     return this._errors;
   }
 
-  _messages = {};
   get messages() {
     return this._messages;
   }
 
-  @Input() set errors(val) {
+  get disabled() {
+    return this._disabled;
+  }
+
+  @Input('ff-validation-errors') set errors(val) {
     this._errors = val;
   }
 
-  @Input() set messages(val) {
+  @Input('ff-validation-messages') set messages(val) {
     this._messages = val;
   }
 
-  constructor() {
+  @Input('ff-validation-disabled') set disabled(val: boolean) {
+    this._disabled = val;
   }
 
-  ngOnInit() {
-  }
+  @Input('ff-icon-valid') iconValid: TemplateRef<any>;
+  @Input('ff-icon-invalid') iconInvalid: TemplateRef<any>;
 
   focusInput() {
     this.input && this.input.el.nativeElement.focus();
   }
 
   isTouched() {
-    return this.input && this.input.status === 'touched';
+    return this.input && this.input.touched;
   }
 
+  isDirty() {
+    return this.input && this.input.dirty;
+  }
 }

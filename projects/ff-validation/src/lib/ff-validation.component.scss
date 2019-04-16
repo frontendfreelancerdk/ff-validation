@@ -56,12 +56,15 @@ svg {
 
 .ff-validation-errors {
   background-color: $color_alert;
+  position: relative;
   color: #ffffff;
   margin-top: 0.5em;
+  padding: .15em .3em;
 
   &:before {
     @include css-triangle($color_alert, 'up', 0.5em);
     transform: translate(100%, -100%);
+    top: 0;
   }
 }
 

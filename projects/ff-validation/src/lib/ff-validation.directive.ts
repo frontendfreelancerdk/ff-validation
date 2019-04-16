@@ -1,28 +1,40 @@
-import {Directive, ElementRef, HostListener} from '@angular/core';
+import {AfterViewInit, Directive, ElementRef, HostListener} from '@angular/core';
 
 @Directive({
-  selector: '[FFValidationInput]'
+  selector: '[FFValidationInput]',
+  exportAs: 'FFValidationInput'
 })
-export class FFValidationDirective {
-
-  constructor(public el: ElementRef) {
-    console.log(el);
-  }
-
-  status = 'untouched';
-  focus = false;
+export class FFValidationDirective implements AfterViewInit {
+  value = '';
+  dirty = false;
+  touched = false;
+  focused = false;
 
   @HostListener('focus')
   onFocus() {
-    this.focus = true;
+    this.focused = true;
+  }
+
+  @HostListener('input')
+  onInput() {
+    this.value = this.el.nativeElement.value;
+    if (!this.dirty) {
+      this.dirty = true;
+    }
   }
 
   @HostListener('blur')
   onBlur() {
-    this.focus = false;
-    if (this.status === 'untouched') {
-      this.status = 'touched';
+    this.focused = false;
+    if (!this.touched) {
+      this.touched = true;
     }
   }
 
+  constructor(public el: ElementRef) {
+  }
+
+  ngAfterViewInit(): void {
+    this.value = this.el.nativeElement.value;
+  }
 }

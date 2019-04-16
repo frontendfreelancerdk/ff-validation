@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -6,29 +6,41 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'ff-validation-app';
-  myErrors = ['email'];
+
+  hardcodedErrors = ['required', 'email'];
+
+  @ViewChild('test') input;
+
+  get myErrors() {
+    const errors = this.myForm.get('userEmail').errors;
+    return errors ? Object.keys(errors) : [];
+  }
+
+  get myEmailValidationMessages(){
+    return {'required': 'Field is required!',
+      'pattern': this.input.value + ' is not a real e-mail'}
+  }
+
   myMessages = {
-    'email': 'email lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, ut!',
-    'required': 'required',
-    'phone': 'phone'
+    'email': 'Field should contain e-mail',
+    'required': 'Field is required!',
+    'phone': 'Field should contain phone',
+    'pattern': 'Field does not match to pattern'
   };
   myForm: FormGroup = new FormGroup({
-
-    'userName': new FormControl('Tom', Validators.required),
-    'userEmail': new FormControl('', [
+    'userEmail': new FormControl('1', [
       Validators.required,
-      Validators.pattern('[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}')
+      Validators.pattern('[a-zA-Z_0-9]+@[a-zA-Z_0-9]{2,}[\.][a-zA-Z]{2,4}')
     ]),
   });
 
   constructor() {
-    setInterval(() => {
-      this.myErrors = ['email'];
-      setTimeout(() => {
-        this.myErrors = [];
-      }, 2000);
-    }, 4000);
   }
+
+  ngAfterViewInit(): void {
+    console.log(this.input);
+  }
+
 }

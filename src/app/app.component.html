@@ -1,8 +1,27 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div class="font-size">
-  <ff-validation [errors]="myErrors" [messages]="myMessages">
-    <i class="icon"></i>
-    <input type="text" FFValidationInput>
+  <ff-validation [ff-validation-errors]="hardcodedErrors" [ff-validation-messages]="myMessages">
+    <input type="text" FFValidationInput placeholder="Email">
   </ff-validation>
 </div>
+
+
+<form action="" [formGroup]="myForm" style="max-width: 300px; margin: 30px">
+  <ff-validation [ff-validation-errors]="myErrors"
+                 [ff-validation-messages]="myEmailValidationMessages"
+                 [ff-icon-invalid]="myInvalidIcon"
+                 [ff-icon-valid]="myValidIcon">
+    <i class="icon"></i>
+    <input type="text" FFValidationInput [formControlName]="'userEmail'" #test="FFValidationInput">
+  </ff-validation>
+</form>
+
+<ng-template #myValidIcon>
+  <!--  Here can be some icon-->
+  <span>valid</span>
+</ng-template>
+
+<ng-template #myInvalidIcon>
+  <!--  Here can be some icon-->
+  <span>invalid</span>
+</ng-template>
 
