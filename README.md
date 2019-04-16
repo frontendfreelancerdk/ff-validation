@@ -1,9 +1,8 @@
 [![Build Status](https://travis-ci.org/frontendfreelancerdk/ff-validation.svg?branch=master)](https://travis-ci.org/frontendfreelancerdk/ff-validation)
 
 # ff-validation
-![Screenshot](https://github.com/frontendfreelancerdk/ff-validation/blob/master/projects/ff-validation/screenshot.png?raw=true)
+![Screenshot](https://github.com/frontendfreelancerdk/ff-validation/blob/master/screenshot.png?raw=true)
 
-![Screenshot2](https://github.com/frontendfreelancerdk/ff-validation/blob/master/projects/ff-validation/screenshot(1).png?raw=true)
 ## Installing 
 
 ### Npm 
@@ -17,14 +16,14 @@ npm install ff-validation --save
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {FFModalModule} from 'ff-modal';
+import {FFValidationModule} from 'ff-validation';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    FFModalModule
+    FFValidationModule
   ],
   bootstrap: [AppComponent]
 })
@@ -98,8 +97,9 @@ export class AppComponent {
                                             'pattern': 'Field should contain e-mail'}"
                  [ff-icon-invalid]="myInvalidIcon"
                  [ff-icon-valid]="myValidIcon">
-    <i class="icon"></i>
-    <input type="text" FFValidationInput [formControlName]="'userEmail'" #email="FFValidationInput">
+<!-- Also you can put your icon as ng content (e.g. envelope for email input) as on screen below -->
+    <i class="icon"></i> 
+    <input type="text" placeholder="Email" FFValidationInput [formControlName]="'userEmail'" #email="FFValidationInput">
   </ff-validation>
 </form>
 
@@ -116,18 +116,20 @@ then put it in ff-validation component [ff-icon-invalid] or [ff-icon-valid] -->
   <i class="fa fa-check"></i>
 </ng-template>
 ```
-
+![Screenshot2](https://raw.githubusercontent.com/frontendfreelancerdk/ff-validation/master/screenshot(1).png)
 ## Api
 ###`ff-validation` component api
 
 [ff-validation-errors] is strings array which contains names of your validation errors. 
-Example 
+
+
 ```typescript
 ['required', 'email']
 ```
 
 [ff-validation-messages] is object where key is validation error name and value is message.
-Example 
+
+
 ```typescript
 {required: "Field is required!",
  email: "Field should contain valid e-mail"}
