@@ -31,7 +31,7 @@ export class AppModule {
 }
 ```
 
-## Using
+## Usage
 
 ### Simple usage
 
@@ -165,11 +165,11 @@ You can change default styles.
 /* for messages wrapper */
 }
 .ff-invalid{
-/* this class will added to .ff-validation-input when input is dirty,
+/* this class will be added to .ff-validation-input when input is dirty,
 touched and errors array is not empty*/
 }
 .ff-valid{
-/* this class will added to .ff-validation-input when input is dirty,
+/* this class will be added to .ff-validation-input when input is dirty,
 touched and errors array is empty*/
 }
 
